@@ -24,10 +24,12 @@ function ButtonAppBar(props) {
     <div className={classes.root}>
       <AppBar position="static">
         <Toolbar>
-          <Typography variant="h6" className={classes.title}>
-            
+          <Typography variant="h6" className={classes.title}>            
+              {props.authInfo.isAuthenticated ? ("Bienvenido, " + props.authInfo.usuario.name): ("Bienvenido")}
           </Typography>
-          <Button color="inherit" onClick={props.goLogin} >Login</Button>
+          {!props.authInfo.isAuthenticated ? (<Button color="inherit" onClick={props.goLogin} >Login</Button>)
+          : <Button color="inherit" >Logout</Button>  }
+          
         </Toolbar>
       </AppBar>
     </div>

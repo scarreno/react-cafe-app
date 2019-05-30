@@ -1,7 +1,7 @@
 const mainState = {
     auth: {
         token: '',
-        isAuthenticated: null,
+        isAuthenticated: false,
         usuario: {}
     },
     login: {

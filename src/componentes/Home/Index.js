@@ -4,17 +4,17 @@ import './style.css';
 import ButtonAppBar from './AppBar';
 import { store } from './../../store/Index';
 
-class Index extends React.Component {
+class Home extends React.Component {
     redirectToLogin = () => {
         this.props.history.push('/login');
     }
 
     render() {
-        const stateredux = store.getState();
-        console.log(stateredux);
+        const stateRedux = store.getState();
+        console.log(stateRedux);
         return (
             <div>
-                <ButtonAppBar goLogin={this.redirectToLogin}/>    
+                <ButtonAppBar goLogin={this.redirectToLogin} authInfo={stateRedux.auth}/>    
                 <div>
                     <label className="pageTitleLabel">React Cafe App</label>
                 </div>
@@ -29,4 +29,4 @@ function mapStateToProps(state, ownProps) {
     };
 }
 
-export default connect(mapStateToProps)(Index);
+export default connect(mapStateToProps)(Home);

@@ -8,7 +8,7 @@ import { actionDoLogin, actionCloseDialog } from './Action';
 import AlertDialog from './../Genericos/ErrorDialog';
 import { withRouter } from "react-router";
 
-class Index extends React.Component {
+class Login extends React.Component {
 
     constructor(props, context) {
         super(props, context);
@@ -93,4 +93,4 @@ const mapDispatchToProps = dispatch => ({
       },
   });
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Index));
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Login));
