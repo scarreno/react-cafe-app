@@ -1,4 +1,4 @@
-const mainState = {
+/*const mainState = {
     auth: {
         token: '',
         isAuthenticated: false,
@@ -9,6 +9,22 @@ const mainState = {
         errorMessage:''
     },    
     usuarios: []
+};
+*/
+
+const mainState = {
+    authentication: {
+        token: '',
+        isAuthenticated: false,
+        usuario: {},
+        login: {
+            shouldShowAlert: false,
+            errorMessage:''
+        }
+    },
+    userData: {
+        usuarios: []
+    }
 };
 
 export default mainState;

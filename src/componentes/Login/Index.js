@@ -80,8 +80,8 @@ class Login extends React.Component {
 
 const mapStateToProps = state  => {
     return {
-        errorMessage: state.login.errorMessage,
-        shouldShowAlert: state.login.shouldShowAlert
+        errorMessage: state.authentication.login.errorMessage,
+        shouldShowAlert: state.authentication.login.shouldShowAlert
     }
 }
 const mapDispatchToProps = dispatch => ({

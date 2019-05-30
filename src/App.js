@@ -3,6 +3,9 @@ import mainState from './store/state';
 import React, { Component } from 'react'  ;
 import './App.css';
 import Routes from "./Routes";
+import { persistor } from './store/Index';
+import { PersistGate } from 'redux-persist/lib/integration/react';
+import LoadingView from './componentes/Genericos/LoadingView';
 
 class App extends Component {
   constructor(props) {
@@ -23,9 +26,13 @@ class App extends Component {
     };
 
     return (
-      <div>
-        <Routes childProps={childProps}/>
-      </div>
+      // the loading and persistor props are both required!
+      //<PersistGate loading={<LoadingView />} persistor={persistor}>
+        <div>
+          <Routes childProps={childProps}/>
+        </div>
+      //</PersistGate>
+      
       
     )
   }

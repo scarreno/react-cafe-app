@@ -28,7 +28,7 @@ function ButtonAppBar(props) {
               {props.authInfo.isAuthenticated ? ("Bienvenido, " + props.authInfo.usuario.name): ("Bienvenido")}
           </Typography>
           {!props.authInfo.isAuthenticated ? (<Button color="inherit" onClick={props.goLogin} >Login</Button>)
-          : <Button color="inherit" >Logout</Button>  }
+          : <Button color="inherit" onClick={props.goLogout} >Logout</Button>  }
           
         </Toolbar>
       </AppBar>

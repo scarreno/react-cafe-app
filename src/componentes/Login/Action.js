@@ -8,6 +8,7 @@ export const actionLoginSuccess = values => ({ type: CONSTANTES.LOGIN.LOGIN_SUCC
 export const actionLoginError = error => ({ type: CONSTANTES.LOGIN.LOGIN_ERROR, error});
 export const actionOpenDialog = () => ({ type: CONSTANTES.LOGIN.OPEN_DIALOG});
 export const actionCloseDialog = () => ({ type: CONSTANTES.LOGIN.CLOSE_DIALOG});
+export const actionLogout =()=> ({ type: CONSTANTES.LOGIN.LOGOUT});
 
 export const actionDoLogin = ({email, password}, history) => {
     const requestBody = {

@@ -7,14 +7,10 @@ export const reducerLogin = (state = mainState, action) => {
         case CONSTANTES.LOGIN.LOGIN_SUCCESS:
             return Object.assign({}, state, {
                 ...state,
-                auth: {
-                    ...state.auth,
-                    isAuthenticated: true,
-                    token: action.datos.token,
-                    usuario: action.datos.usuario
-                  },
+                isAuthenticated: true,
+                token: action.datos.token,
+                usuario: action.datos.usuario,
                 login: {
-                    ...state.login,
                     errorMessage: '',
                     shouldShowAlert: false
                 }                  
@@ -22,10 +18,7 @@ export const reducerLogin = (state = mainState, action) => {
         case CONSTANTES.LOGIN.LOGIN_ERROR:
             return  Object.assign({}, state, {
                 ...state,
-                auth: {
-                    ...state.auth,
-                    isAuthenticated: false,
-                    },
+                isAuthenticated: false,
                 login: {
                     ...state.login,
                     errorMessage: action.error.data.error.message
@@ -33,11 +26,10 @@ export const reducerLogin = (state = mainState, action) => {
                 });         
         case CONSTANTES.LOGIN.OPEN_DIALOG:
                 return  Object.assign({}, state, {
-                    ...state,
                     login: {
                         ...state.login,
                         shouldShowAlert: true
-                        }
+                        }                                  
                     });                         
         case CONSTANTES.LOGIN.CLOSE_DIALOG:
                 return  Object.assign({}, state, {
@@ -45,8 +37,15 @@ export const reducerLogin = (state = mainState, action) => {
                     login: {
                         ...state.login,
                         shouldShowAlert: false
-                        }
+                        }                                  
                     });                     
+        case CONSTANTES.LOGIN.LOGOUT:
+            return  Object.assign({}, state, {
+                ...state,
+                isAuthenticated: false,
+                token: '',
+                usuario: {},
+                });                                         
         default:
             return state;
     }
