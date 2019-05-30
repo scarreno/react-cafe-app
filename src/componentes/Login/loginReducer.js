@@ -1,7 +1,7 @@
-import CONSTANTES from './../../Constantes';
-import mainState from './../../store/state';
+import CONSTANTES from '../../Constantes';
+import mainState from '../../store/state';
 
-export const reducerLogin = (state = mainState, action) => {
+export const loginReducer = (state = mainState, action) => {
 
     switch (action.type) {
         case CONSTANTES.LOGIN.LOGIN_SUCCESS:

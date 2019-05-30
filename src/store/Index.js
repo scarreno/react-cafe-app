@@ -5,8 +5,8 @@ import storage from 'redux-persist/lib/storage';
 import autoMergeLevel2 from 'redux-persist/lib/stateReconciler/autoMergeLevel2';
 import thunk from 'redux-thunk';
 import mainState from './state';
-import { reducerLogin } from './../componentes/Login/Reducer';
-import { reducerUsuarios } from './../componentes/Usuarios/reducerUsuarios';
+import { loginReducer } from '../componentes/Login/loginReducer';
+import { usuariosReducer } from '../componentes/Usuarios/usuariosReducer';
 
 
 const persistConfig = {
@@ -16,8 +16,8 @@ const persistConfig = {
    };
 
 const reducers = combineReducers({
-    authentication: reducerLogin,
-    userData: reducerUsuarios
+    authentication: loginReducer,
+    userData: usuariosReducer
   });
 
 const pReducer = persistReducer(persistConfig, reducers);

@@ -1,8 +1,8 @@
-import CONSTANTES from './../../Constantes';
+import CONSTANTES from '../../Constantes';
 import axios from 'axios';
-import { apiLogin } from './../../config/apiUrl';
+import { apiLogin } from '../../config/apiUrl';
 import qs from 'qs';
-
+import { actionGetUsuarios } from '../Usuarios/usuariosActions';
 
 export const actionLoginSuccess = values => ({ type: CONSTANTES.LOGIN.LOGIN_SUCCESS, datos: values});
 export const actionLoginError = error => ({ type: CONSTANTES.LOGIN.LOGIN_ERROR, error});
@@ -28,6 +28,8 @@ export const actionDoLogin = ({email, password}, history) => {
             console.log('success!!!!');
             console.log(response);
             dispatch(actionLoginSuccess(response.data));
+            dispatch(actionGetUsuarios());
+
             history.push('/');
         }
         catch (error) {

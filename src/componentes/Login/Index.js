@@ -4,8 +4,8 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import { connect } from 'react-redux';
 import './style.css';
-import { actionDoLogin, actionCloseDialog } from './Action';
-import AlertDialog from './../Genericos/ErrorDialog';
+import { actionDoLogin, actionCloseDialog } from './loginActions';
+import AlertDialog from '../Genericos/ErrorDialog';
 import { withRouter } from "react-router";
 
 class Login extends React.Component {
@@ -41,6 +41,10 @@ class Login extends React.Component {
         this.props.closeDialog();
     }
 
+    handleBack =()=> {
+        this.props.history.push('/');
+    }
+
     render() {
         return (            
             <div className="container">
@@ -72,6 +76,12 @@ class Login extends React.Component {
                         onClick={this.handleSubmit}>
                             Sign In
                         </Button>
+                    <Button variant="contained" 
+                        color="secondary" 
+                        className="button"
+                        onClick={this.handleBack}>
+                            Volver
+                        </Button>                        
                 </div>
             </div>
         );

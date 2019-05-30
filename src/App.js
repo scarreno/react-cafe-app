@@ -8,15 +8,6 @@ import { PersistGate } from 'redux-persist/lib/integration/react';
 import LoadingView from './componentes/Genericos/LoadingView';
 
 class App extends Component {
-  constructor(props) {
-    super(props);
-  
-
-  }
-
-  userHasAuthenticated = value =>{
-    this.setState({ isAuthenticated: value });
-  }
 
   render() {
     console.log(this.state);
@@ -27,11 +18,11 @@ class App extends Component {
 
     return (
       // the loading and persistor props are both required!
-      //<PersistGate loading={<LoadingView />} persistor={persistor}>
+      <PersistGate loading={<LoadingView />} persistor={persistor}>
         <div>
           <Routes childProps={childProps}/>
         </div>
-      //</PersistGate>
+      </PersistGate>
       
       
     )

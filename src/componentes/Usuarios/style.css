@@ -1,0 +1,17 @@
+.root {
+    width: 70%;
+    margin-top: 10px;
+    margin: 30px auto;
+}
+
+.title {
+    justify-content: center;
+    display: block;
+    text-align: center;
+    line-height: 150%;
+    font-size: 2em;
+}
+
+.table {
+    min-width: 650;
+}
