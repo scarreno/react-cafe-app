@@ -10,10 +10,6 @@ import Paper from '@material-ui/core/Paper';
 import Button from '@material-ui/core/Button';
 
 class ListadoUsuarios extends React.Component {
-
-
-
-
     render() {
         return (
             <div>

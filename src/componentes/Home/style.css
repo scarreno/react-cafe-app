@@ -14,3 +14,8 @@
     display: flex;
     margin: 30px auto;
   }
+  .contenido-dialog h6{
+    font-size: 15px !important;
+    font-weight: 500 !important;
+    color: #5C6784 !important;
+}

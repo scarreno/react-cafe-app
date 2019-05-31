@@ -20,7 +20,6 @@ const useStyles = makeStyles(theme => ({
 function ButtonAppBar(props) {
   const classes = useStyles();
 
-  console.log(props);
   return (
     <div className={classes.root}>
       <AppBar position="static">
@@ -30,7 +29,7 @@ function ButtonAppBar(props) {
           </Typography>
           {!props.authInfo.isAuthenticated ? (<Button color="inherit" onClick={props.goLogin} >Login</Button>)
           :
-          <div><Button  variant="contained" onClick={props.createUser} >Crear Usuario</Button> &nbsp;&nbsp;
+          <div><Button  variant="contained" onClick={props.openUserCreationModal} >Crear Usuario</Button> &nbsp;&nbsp;
           <Button color="secondary" variant="contained" onClick={props.goLogout} >Logout</Button></div> }          
         </Toolbar>
       </AppBar>
