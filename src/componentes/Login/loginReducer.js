@@ -40,6 +40,7 @@ export const loginReducer = (state = mainState, action) => {
                         }                                  
                     });                     
         case CONSTANTES.LOGIN.LOGOUT:
+            console.log(state);
             return  Object.assign({}, state, {
                 ...state,
                 isAuthenticated: false,

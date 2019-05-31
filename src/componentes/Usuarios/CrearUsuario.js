@@ -45,7 +45,7 @@ class CrearUsuario extends React.Component {
                 fullScreen={false}
                 open={this.props.shouldOpenCreateUserModal}
                 scroll="body"
-                maxWidth="md"
+                maxWidth="xs"
                 onClose={this.handleClose}
                 aria-labelledby="responsive-dialog-title"
                 disableBackdropClick={true}
@@ -65,7 +65,7 @@ class CrearUsuario extends React.Component {
                         <div className="row" id="selectRole" style={{ marginTop: '10px'}}>
                             <FormControl style={{ width:'100%'}}>
                                 <InputLabel shrink htmlFor="age-label-placeholder">
-                                    Age
+                                    Rol
                                 </InputLabel>
                                 <Select
                                 value={'ADMIN_ROLE'}

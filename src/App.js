@@ -1,5 +1,3 @@
-
-import mainState from './store/state';
 import React, { Component } from 'react'  ;
 import './App.css';
 import Routes from "./Routes";

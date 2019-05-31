@@ -31,7 +31,6 @@ class Home extends React.Component {
     }
     render() {
         const stateRedux = store.getState();
-        console.log(stateRedux);
         return (
             <div>
                 <ButtonAppBar 

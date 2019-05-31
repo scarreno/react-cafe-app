@@ -7,7 +7,7 @@ import thunk from 'redux-thunk';
 import mainState from './state';
 import { loginReducer } from '../componentes/Login/loginReducer';
 import { usuariosReducer } from '../componentes/Usuarios/usuariosReducer';
-
+import logger from 'redux-logger'
 
 const persistConfig = {
     key: 'root',
@@ -25,6 +25,6 @@ const pReducer = persistReducer(persistConfig, reducers);
 export const store = createStore(
                 pReducer, 
                 mainState,
-                applyMiddleware(thunk));
+                applyMiddleware(thunk,logger));
 
 export const persistor = persistStore(store);
