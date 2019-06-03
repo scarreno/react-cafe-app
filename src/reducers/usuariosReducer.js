@@ -1,5 +1,5 @@
-import mainState from '../../store/state';
-import CONSTANTES from '../../Constantes';
+import mainState from './../store/mainState';
+import CONSTANTES from './../Constantes';
 
 export const usuariosReducer = (state = mainState, action) => {
     switch (action.type) {

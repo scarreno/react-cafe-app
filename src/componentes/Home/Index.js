@@ -1,8 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import ButtonAppBar from './AppBar';
+import ButtonAppBar from './ButtonAppBar';
 import { store } from './../../store/Index';
-import { actionLogout } from './../Login/loginActions';
+import { actionLogout } from './../../actions/loginActions';
 import ListadoUsuarios from './../Usuarios/ListadoUsuarios';
 import './style.css';
 import logo from './../../logo.svg';
@@ -46,7 +46,7 @@ class Home extends React.Component {
                     <img src={logo} className="App-logo" alt="logo" /></div>)}
                     
                 </div>
-                <CrearUsuario shouldOpenCreateUserModal={this.state.openModal}/>                
+                <CrearUsuario shouldOpenCreateUserModal={this.props.shouldOpenCreateUserModal}/>                
             </div>
         );
     }
@@ -54,7 +54,7 @@ class Home extends React.Component {
 
 function mapStateToProps(state, ownProps) {
     return {
-        
+        shouldOpenCreateUserModal: state.modals.shouldOpenCrearUsuarioModal
     };
 }
 

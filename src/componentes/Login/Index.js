@@ -4,7 +4,8 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import { connect } from 'react-redux';
 import './style.css';
-import { actionDoLogin, actionCloseDialog } from './loginActions';
+import { actionDoLogin } from './../../actions/loginActions';
+import { actionCloseAlertDialog } from './../../actions/modalActions';
 import AlertDialog from '../Genericos/ErrorDialog';
 import { withRouter } from "react-router";
 
@@ -90,8 +91,8 @@ class Login extends React.Component {
 
 const mapStateToProps = state  => {
     return {
-        errorMessage: state.authentication.login.errorMessage,
-        shouldShowAlert: state.authentication.login.shouldShowAlert
+        errorMessage: state.modals.errorAlert.errorMessage,
+        shouldShowAlert: state.modals.errorAlert.shouldShowAlert
     }
 }
 const mapDispatchToProps = dispatch => ({
@@ -99,7 +100,7 @@ const mapDispatchToProps = dispatch => ({
       dispatch(actionDoLogin(values, history));
     },
     closeDialog: () => {
-        dispatch(actionCloseDialog());
+        dispatch(actionCloseAlertDialog());
       },
   });
 

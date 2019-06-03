@@ -8,7 +8,6 @@ import LoadingView from './componentes/Genericos/LoadingView';
 class App extends Component {
 
   render() {
-    console.log(this.state);
     
     const childProps = {
       userHasAuthenticated: this.userHasAuthenticated

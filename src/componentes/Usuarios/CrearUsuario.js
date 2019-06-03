@@ -13,13 +13,13 @@ import {
     Input
   } from '@material-ui/core';
 import { connect } from 'react-redux';
+import { actionCloseCrearUsuarioModal } from './../../actions/modalActions';
 
 class CrearUsuario extends React.Component {
     constructor(props, context) {
         super(props, context);
         
         this.state = {
-            open: false,
             email: '',
             name: '',
             role:''
@@ -31,7 +31,7 @@ class CrearUsuario extends React.Component {
     }
     
      handleClose = () => {
-        this.setState({open: false});
+        this.props.closeModal();
     }
     
     handleChange = (event) => {
@@ -39,6 +39,11 @@ class CrearUsuario extends React.Component {
     }
 
     render() {
+
+      if(!this.props.shouldOpenCreateUserModal) {
+        return null;
+      }
+
         return (
             <div>
               <Dialog
@@ -98,10 +103,18 @@ class CrearUsuario extends React.Component {
     }
 }
 
-function mapStateToProps(state, ownProps) {
-    return {
-        
-    };
+const mapStateToProps = (state, ownProps) => {
+  return {
+    prop: state.prop
+  }
 }
 
-export default connect(mapStateToProps)(CrearUsuario);
+const mapDispatchToProps = (dispatch, ownProps) => {
+  return {
+    closeModal: () => {
+      dispatch(actionCloseCrearUsuarioModal())
+    }
+  }
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)(CrearUsuario);

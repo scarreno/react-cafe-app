@@ -1,5 +1,5 @@
-import CONSTANTES from '../../Constantes';
-import mainState from '../../store/state';
+import CONSTANTES from './../Constantes';
+import mainState from '../store/mainState';
 
 export const loginReducer = (state = mainState, action) => {
 
@@ -24,23 +24,7 @@ export const loginReducer = (state = mainState, action) => {
                     errorMessage: action.error.data.error.message
                     }                                  
                 });         
-        case CONSTANTES.LOGIN.OPEN_DIALOG:
-                return  Object.assign({}, state, {
-                    login: {
-                        ...state.login,
-                        shouldShowAlert: true
-                        }                                  
-                    });                         
-        case CONSTANTES.LOGIN.CLOSE_DIALOG:
-                return  Object.assign({}, state, {
-                    ...state,
-                    login: {
-                        ...state.login,
-                        shouldShowAlert: false
-                        }                                  
-                    });                     
         case CONSTANTES.LOGIN.LOGOUT:
-            console.log(state);
             return  Object.assign({}, state, {
                 ...state,
                 isAuthenticated: false,

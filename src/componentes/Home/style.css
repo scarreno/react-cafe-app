@@ -19,3 +19,15 @@
     font-weight: 500 !important;
     color: #5C6784 !important;
 }
+
+.AppBarRoot {
+  flex-grow: 1,
+}
+
+.AppBarMenuButton {
+  margin-right: 2,
+}
+
+.AppBarTitle {
+  flex-grow: 1
+}
