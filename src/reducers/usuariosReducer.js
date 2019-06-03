@@ -8,6 +8,13 @@ export const usuariosReducer = (state = mainState, action) => {
                 ...state,
                 usuarios: action.datos
             });              
+        case CONSTANTES.USUARIOS.CREATE_USUARIO_SUCCESS:
+            return state;
+        case CONSTANTES.USUARIOS.GET_USUARIOS_LOADING:
+            return Object.assign({}, state, {
+                ...state,
+                loadingUsuario: action.show
+            });                          
         default:
             return state;
     }

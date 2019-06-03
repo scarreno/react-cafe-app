@@ -1,13 +1,14 @@
+
 import React from 'react';
 import { connect } from 'react-redux';
 import './style.css';
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableHead from '@material-ui/core/TableHead';
-import TableRow from '@material-ui/core/TableRow';
-import Paper from '@material-ui/core/Paper';
-import Button from '@material-ui/core/Button';
+import { Table,
+    TableBody,
+    TableCell,
+    TableHead,
+    TableRow,
+    Paper,
+    Button } from '@material-ui/core';
 
 class ListadoUsuarios extends React.Component {
     render() {
@@ -27,7 +28,7 @@ class ListadoUsuarios extends React.Component {
                     </TableHead>
                     <TableBody>
                     {this.props.rows.map(row => (
-                        <TableRow key={row.name}>
+                        <TableRow key={row._id}>
                         <TableCell component="th" scope="row">
                             {row.email}
                         </TableCell>

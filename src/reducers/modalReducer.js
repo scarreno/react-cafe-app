@@ -18,7 +18,7 @@ export const modalReducer = (state = mainState, action) => {
                 ...state,
                 errorAlert: {
                     shouldShowAlert: true,
-                    errorMessage: action.error.data.error.message
+                    errorMessage: action.error
                     }                                  
                 });                         
         case CONSTANTES.GENERIC.CLOSE_DIALOG:

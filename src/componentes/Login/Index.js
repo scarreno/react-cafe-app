@@ -37,11 +37,6 @@ class Login extends React.Component {
             password: event.target.value
         });
     }
-    
-    handleCloseDialog = ()=> {
-        this.props.closeDialog();
-    }
-
     handleBack =()=> {
         this.props.history.push('/');
     }
@@ -52,7 +47,7 @@ class Login extends React.Component {
                 <AlertDialog shouldOpenDialog={this.props.shouldShowAlert} 
                         title="Error de Conexión" 
                         message={this.props.errorMessage} 
-                        handleClose={this.handleCloseDialog} 
+                        handleClose={this.props.closeDialog} 
                         />
                 <div className="box">
                         <label className="titleLabel">Ingreso al sistema</label>

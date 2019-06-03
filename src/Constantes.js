@@ -1,5 +1,6 @@
 const DEFAULT_MESSAGES = {
-    LOGIN_ERROR: 'Se ha producido un error al autenticar el usuario'
+    LOGIN_ERROR: 'Se ha producido un error al autenticar el usuario',
+    DEFAULT_REQUIRED_FIELD: 'Requerido'
 }
 
 const CONSTANTES = {
@@ -13,10 +14,12 @@ const CONSTANTES = {
         LOGOUT: 'LOGOUT'
     },
     USUARIOS:{
-        GET_USUARIOS:'GET_USUARIOS',
         GET_USUARIOS_SUCCESS:'GET_USUARIOS_SUCCESS',
         OPEN_CREAR_USUARIO_MODAL: 'OPEN_CREAR_USUARIO_MODAL',
         CLOSE_CREAR_USUARIO_MODAL: 'CLOSE_CREAR_USUARIO_MODAL',
+        CREATE_USUARIO_SUCCESS:'CREATE_USUARIO_SUCCESS',
+        CREATE_USUARIO_ERROR:'CREATE_USUARIO_ERROR',
+        GET_USUARIOS_LOADING: 'GET_USUARIOS_LOADING'
     },
     DEFAULT_MESSAGES
 }

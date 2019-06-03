@@ -6,7 +6,8 @@ const mainState = {
         usuario: {}        
     },
     userData: {
-        usuarios: []
+        usuarios: [],
+        loadingUsuario: false
     },
     modals:{
         shouldOpenCrearUsuarioModal: false,

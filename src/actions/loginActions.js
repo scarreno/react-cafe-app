@@ -29,7 +29,7 @@ export const actionDoLogin = ({email, password}, history) => {
             history.push('/');
         }
         catch (error) {
-            dispatch(actionOpenAlertDialog(error.response));
+            dispatch(actionOpenAlertDialog(error.response.error.data.error.message));
         }
     };
   };
