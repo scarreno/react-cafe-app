@@ -8,9 +8,18 @@ import { Table,
     TableHead,
     TableRow,
     Paper,
-    Button } from '@material-ui/core';
+    Button  } from '@material-ui/core';
 
 class ListadoUsuarios extends React.Component {
+
+    handleEditar =(event)=>{
+        console.log(event.target);
+    }
+
+    handleEliminar =(event)=>{
+        console.log(event);
+    }
+
     render() {
         return (
             <div>
@@ -24,20 +33,22 @@ class ListadoUsuarios extends React.Component {
                         <TableCell align="center">Rol</TableCell>
                         <TableCell align="center">Estado</TableCell>
                         <TableCell ></TableCell>
+                        <TableCell ></TableCell>
                     </TableRow>
                     </TableHead>
                     <TableBody>
                     {this.props.rows.map(row => (
                         <TableRow key={row._id}>
-                        <TableCell component="th" scope="row">
-                            {row.email}
-                        </TableCell>
+                        <TableCell component="th" scope="row">{row.email}</TableCell>
                         <TableCell align="center">{row.name}</TableCell>
                         <TableCell align="center">{row.role}</TableCell>
                         <TableCell align="center">{row.status?'Activo':'Inactivo'}</TableCell>
                         <TableCell align="center">
-                            <Button variant="contained" user={row}>Editar</Button>
+                            <Button variant="contained" user={row} onClick={this.handleEditar}>Editar</Button>
                         </TableCell>
+                        <TableCell align="center">
+                            <Button variant="contained" onClick={this.handleEliminar(row)}>Eliminar</Button>
+                        </TableCell>                        
                         </TableRow>
                     ))}
                     </TableBody>

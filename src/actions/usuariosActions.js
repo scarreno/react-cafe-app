@@ -59,7 +59,13 @@ export const actionCrearUsuario = (usuario) => {
       }
       catch(error){
         dispatch(actionCloseCrearUsuarioModal());
-        dispatch(actionOpenAlertDialog(error.response.data.err.message));
+        console.log(error.response);
+        if(error.response.status===401){
+          dispatch(actionOpenAlertDialog(CONSTANTES.DEFAULT_MESSAGES.NOT_AUTHORIZED));
+        }else{
+          dispatch(actionOpenAlertDialog(error.response.data.err.message));
+        }
+        
       }        
   }
 }

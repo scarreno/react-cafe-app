@@ -19,7 +19,7 @@ class ButtonAppBar extends React.Component {
             </Typography>
             {!this.props.authInfo.isAuthenticated ? (<Button color="inherit" onClick={this.props.goLogin} >Login</Button>)
             :
-            <div><Button  variant="contained" onClick={this.props.openCrearUsuarioModal} >Crear Usuario</Button> &nbsp;&nbsp;
+            <div><Button  variant="contained" onClick={this.props.openCrearUsuarioModal} disabled={!this.props.isAdmin} >Crear Usuario</Button> &nbsp;&nbsp;
             <Button color="secondary" variant="contained" onClick={this.props.goLogout} >Logout</Button></div> }          
           </Toolbar>
         </AppBar>
@@ -30,7 +30,7 @@ class ButtonAppBar extends React.Component {
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    
+    isAdmin: state.authentication.usuario.role==='ADMIN_ROLE'
   }
 }
 

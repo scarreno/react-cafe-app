@@ -1,6 +1,7 @@
 const DEFAULT_MESSAGES = {
     LOGIN_ERROR: 'Se ha producido un error al autenticar el usuario',
-    DEFAULT_REQUIRED_FIELD: 'Requerido'
+    DEFAULT_REQUIRED_FIELD: 'Requerido',
+    NOT_AUTHORIZED: 'Usuario no autorizado'
 }
 
 const CONSTANTES = {
