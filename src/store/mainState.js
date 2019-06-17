@@ -10,7 +10,11 @@ const mainState = {
         loadingUsuario: false
     },
     modals:{
-        shouldOpenCrearUsuarioModal: false,
+        crearEditarUsuarioModal:{
+            shouldOpenCrearEditarUsuarioModal: false,
+            usuarioData:null,
+            isEditMode: false
+        },        
         errorAlert: {
             shouldShowAlert: false,
             errorMessage:''

@@ -27,25 +27,21 @@ const defaultState = {
 };
 
 class CrearUsuario extends React.Component {
-  
-
     constructor(props, context) {
         super(props, context);
-        
+
         this.state = defaultState;
     }
 
     handleSubmit = () =>{      
       this.crearUsuario();
-    }
-    
+    }    
     handleClose = () => {
       this.setState(defaultState);
       this.props.closeModal();
-    }
-    
+    }    
     handleNameChange = (event) => {
-        this.setState({ name: event.target.value})
+      this.setState({ name: event.target.value})
     }
     handleEmailChange = (event) => {
       this.setState({ email: event.target.value})
@@ -56,7 +52,7 @@ class CrearUsuario extends React.Component {
     handlePasswordChange = (event) => {
       this.setState({ password: event.target.value})
     } 
-    
+
     formValidation =() => {
       let errors = {};
       let formIsValid = true;
@@ -121,8 +117,8 @@ class CrearUsuario extends React.Component {
       if(!this.props.shouldOpenCreateUserModal) {
         return null;
       }
-        return (
 
+        return (
               <Dialog
                 fullScreen={false}
                 open={this.props.shouldOpenCreateUserModal}
@@ -133,7 +129,7 @@ class CrearUsuario extends React.Component {
                 disableBackdropClick={true}
               >
                 <DialogTitle className="titulo-dialog" id="responsive-dialog-title">
-                  Crear Usuario
+                  { this.props.isEditMode? "Editar Usuario": "Crear Usuario" }
                 </DialogTitle>
                 <DialogContent>
                 <form>
@@ -163,7 +159,8 @@ class CrearUsuario extends React.Component {
                             value={this.state.email}
                             onBlur={this.onBlurEmail}
                         />
-                      </div>                
+                      </div>     
+                      {!this.props.isEditMode ?
                       <div className="row" id="txtPass" style={{ marginTop: '10px'}}>
                         <TextField
                             label="Password"
@@ -177,7 +174,7 @@ class CrearUsuario extends React.Component {
                             value={this.state.password}
                             inputProps={{maxLength: 6}}
                         />
-                      </div>                                      
+                      </div> : null }                                  
                       <div className="row" id="selectRole" style={{ marginTop: '20px'}}>
                           <FormControl style={{ width:'100%'}} error={!!this.state.errorfields.role}>
                               <InputLabel shrink htmlFor="age-label-placeholder">
@@ -215,15 +212,16 @@ class CrearUsuario extends React.Component {
                     </div>
                   </div>
                 </DialogActions>
-              </Dialog>
-            
+              </Dialog>            
           );
     }
 }
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    prop: state.prop
+    shouldOpenCreateUserModal: state.modals.crearEditarUsuarioModal.shouldOpenCrearEditarUsuarioModal,
+    usuarioData: state.modals.crearEditarUsuarioModal.usuarioData,
+    isEditMode: state.modals.crearEditarUsuarioModal.isEditMode
   }
 }
 

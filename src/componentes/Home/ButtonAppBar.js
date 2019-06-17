@@ -15,7 +15,8 @@ class ButtonAppBar extends React.Component {
         <AppBar position="static">
           <Toolbar>
             <Typography variant="h6" className="AppBarTitle">            
-                {this.props.authInfo.isAuthenticated ? ("Bienvenido, " + this.props.authInfo.usuario.name): ("Bienvenido")}
+                {this.props.authInfo.isAuthenticated ? ("Bienvenido, " + this.props.authInfo.usuario.name + " (" +
+                this.props.authInfo.usuario.email +")"): ("Bienvenido")}
             </Typography>
             {!this.props.authInfo.isAuthenticated ? (<Button color="inherit" onClick={this.props.goLogin} >Login</Button>)
             :

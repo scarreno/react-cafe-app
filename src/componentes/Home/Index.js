@@ -32,7 +32,7 @@ class Home extends React.Component {
     }
     render() {
 
-        console.log('Render HOME');
+     
 
         return (
             <div>
@@ -55,7 +55,7 @@ class Home extends React.Component {
                     <img src={logo} className="App-logo" alt="logo" /></div>)}
                     
                 </div>
-                <CrearUsuario shouldOpenCreateUserModal={this.props.shouldOpenCreateUserModal}/>                
+                <CrearUsuario/>                
             </div>
         );
     }
@@ -63,7 +63,6 @@ class Home extends React.Component {
 
 function mapStateToProps(state, ownProps) {
     return {
-        shouldOpenCreateUserModal: state.modals.shouldOpenCrearUsuarioModal,
         errorMessage: state.modals.errorAlert.errorMessage,
         shouldShowAlert: state.modals.errorAlert.shouldShowAlert,
         usuarios: state.userData.usuarios,

@@ -1,19 +1,21 @@
 
 import React from 'react';
 import { connect } from 'react-redux';
-import './style.css';
-import { Table,
-    TableBody,
-    TableCell,
-    TableHead,
-    TableRow,
-    Paper,
-    Button  } from '@material-ui/core';
+import MUIDataTable from "mui-datatables";
+import Button from '@material-ui/core/Button';
+import { actionOpenEditarUsuarioModal } from './../../actions/modalActions';
 
 class ListadoUsuarios extends React.Component {
 
-    handleEditar =(event)=>{
-        console.log(event.target);
+    handleEditar =(data)=>{
+        const usuarioData = {
+                        id: data[0],
+                        email: data[1],
+                        name: data[2],
+                        role:  data[3],
+                        activo: data[4],                        
+                    };
+        this.props.openEditModal(usuarioData);
     }
 
     handleEliminar =(event)=>{
@@ -21,41 +23,107 @@ class ListadoUsuarios extends React.Component {
     }
 
     render() {
+        this.props.rows.map(field => {
+            field.statusDesc =field.status ? 'Activo':'Inactivo'
+        });
+    
+        const columns = [
+            {
+                name: "_id",
+                label: "Id",
+                options: {
+                 filter: false,
+                 sort: false,
+                 display: 'false'
+                }
+               },            
+            {
+             name: "email",
+             label: "Email",
+             options: {
+              filter: true,
+              sort: true,
+             }
+            },
+            {
+             name: "name",
+             label: "Nombre",
+             options: {
+              filter: true,
+              sort: false,
+             }
+            },
+            {
+             name: "role",
+             label: "Rol",
+             options: {
+              filter: true,
+              sort: false,
+             }
+            },
+            {
+             name: "statusDesc",
+             label: "Estado",
+             options: {
+              filter: true,
+              sort: false,
+             }
+            },
+            {
+             name: "Editar",
+             options: {
+                filter: true,
+                sort: false,
+                empty: true,
+                customBodyRender: (value, tableMeta, updateValue) => {
+                    
+                                return (
+                                    <Button variant="contained" onClick={()=>{this.handleEditar(tableMeta.rowData);}}>
+                                        Editar
+                                    </Button>
+                                );
+                            }
+                        }
+                    },
+           ];
+           
+           const options = {
+             filterType: 'multiselect',
+             print: false,
+             download: false,
+             viewColumns: false,
+             filter: false,
+             selectableRows: true,
+             responsive: 'stacked',
+             textLabels: {
+                body: {
+                  noMatch: "No se encontró información",
+                  toolTip: "Sort",
+                }
+            },
+            pagination: {
+                next: "Siguiente",
+                previous: "Anterior",
+                rowsPerPage: "Filas por página:",
+                displayRows: "of",
+              },
+            onRowsSelect: (currentRowsSelected, allRowsSelected)=>{
+                console.log(allRowsSelected);
+
+            }
+           };
         return (
             <div>
-                <label className="title">Listado de Usuarios</label>
-                <Paper className="root">                
-                <Table className="table">
-                    <TableHead>
-                    <TableRow>
-                        <TableCell>Email</TableCell>
-                        <TableCell align="center">Nombre</TableCell>
-                        <TableCell align="center">Rol</TableCell>
-                        <TableCell align="center">Estado</TableCell>
-                        <TableCell ></TableCell>
-                        <TableCell ></TableCell>
-                    </TableRow>
-                    </TableHead>
-                    <TableBody>
-                    {this.props.rows.map(row => (
-                        <TableRow key={row._id}>
-                        <TableCell component="th" scope="row">{row.email}</TableCell>
-                        <TableCell align="center">{row.name}</TableCell>
-                        <TableCell align="center">{row.role}</TableCell>
-                        <TableCell align="center">{row.status?'Activo':'Inactivo'}</TableCell>
-                        <TableCell align="center">
-                            <Button variant="contained" user={row} onClick={this.handleEditar}>Editar</Button>
-                        </TableCell>
-                        <TableCell align="center">
-                            <Button variant="contained" onClick={this.handleEliminar(row)}>Eliminar</Button>
-                        </TableCell>                        
-                        </TableRow>
-                    ))}
-                    </TableBody>
-                </Table>
-                </Paper>
+                <MUIDataTable
+                title={"Listado de Usuarios"}
+                data={this.props.rows}
+                columns={columns}
+                options={options}
+                search={false}            
+                />
             </div>
-          );
+        );
+
     }
 }
 
@@ -65,5 +133,13 @@ const mapStateToProps = (state, ownProps) => {
     }
 }
 
+const mapDispatchToProps = (dispatch, ownProps) => {
+    return {
+        openEditModal: (userData) => {
+            dispatch(actionOpenEditarUsuarioModal(userData));
+        }
+    }
+}
 
-export default connect(mapStateToProps)(ListadoUsuarios);
+
+export default connect(mapStateToProps,mapDispatchToProps)(ListadoUsuarios);
