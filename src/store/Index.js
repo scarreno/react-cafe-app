@@ -39,5 +39,9 @@ if (process.env.NODE_ENV === "development") {
         applyMiddleware(...middlewares)
       );
 }
+
+console.log('ENV::::' + process.env.NODE_ENV);
+console.log(process.env.NODE_ENV);
+
 export { store };
 export const persistor = persistStore(store);
