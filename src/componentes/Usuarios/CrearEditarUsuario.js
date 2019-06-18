@@ -14,11 +14,12 @@ import {
     TextField
   } from '@material-ui/core'; 
 import { connect } from 'react-redux';
-import { actionCloseCrearUsuarioModal } from './../../actions/modalActions';
-import { actionCrearUsuario } from './../../actions/usuariosActions';
+import { actionCloseCrearUsuarioModal } from '../../actions/modalActions';
+import { actionCrearUsuario, actionEditarUsuario } from '../../actions/usuariosActions';
 import validator from 'email-validator';
 
 const defaultState = {
+  id: '',
   email: '',
   name: '',
   role:  'sel',
@@ -26,7 +27,7 @@ const defaultState = {
   errorfields: {}
 };
 
-class CrearUsuario extends React.Component {
+class CrearEditarUsuario extends React.Component {
     constructor(props, context) {
         super(props, context);
 
@@ -34,7 +35,12 @@ class CrearUsuario extends React.Component {
     }
 
     handleSubmit = () =>{      
-      this.crearUsuario();
+      if(!this.props.isEditMode){
+        this.crearUsuario();
+      }else{
+        this.editarUsuario();
+      }
+      
     }    
     handleClose = () => {
       this.setState(defaultState);
@@ -52,8 +58,23 @@ class CrearUsuario extends React.Component {
     handlePasswordChange = (event) => {
       this.setState({ password: event.target.value})
     } 
+    handleClick =()=>{
+      console.log(this.props);
+    }
 
-    formValidation =() => {
+    handleLoad =()=>{
+      if(this.props.isEditMode){
+        const newstate= {
+          id: this.props.usuarioData.id,
+          email: this.props.usuarioData.email,
+          name: this.props.usuarioData.name,
+          role:  this.props.usuarioData.role,
+        };
+        this.setState(newstate);
+      }
+    }
+
+    formValidation =(isEdit) => {
       let errors = {};
       let formIsValid = true;
 
@@ -70,11 +91,12 @@ class CrearUsuario extends React.Component {
         formIsValid = false;
       }
 
-      if (!this.state.password) {
-        errors["password"] = "Debe ingresar contraseña";
-        formIsValid = false;
+      if(!isEdit){
+        if (!this.state.password) {
+          errors["password"] = "Debe ingresar contraseña";
+          formIsValid = false;
+        }
       }
-
       if (!this.state.role || this.state.role==='sel') {
         errors["role"] = "Debe seleccionar un rol";
         formIsValid = false;
@@ -97,10 +119,8 @@ class CrearUsuario extends React.Component {
       }
     }
     crearUsuario = () => {
-      var validate = this.formValidation();
-
+      var validate = this.formValidation(false);
       if (!validate) return;
-
 
       let usuario = {
         name: this.state.name,
@@ -110,6 +130,19 @@ class CrearUsuario extends React.Component {
       };
       this.props.createUsuario(usuario);
       
+    }
+
+    editarUsuario = () => {
+      var validate = this.formValidation(true);
+      if (!validate) return;
+
+      let usuario = {
+        id: this.state.id,
+        name: this.state.name,
+        email: this.state.email,
+        role: this.state.role        
+      };
+      this.props.updateUsuario(usuario);      
     }
 
 
@@ -127,6 +160,7 @@ class CrearUsuario extends React.Component {
                 onClose={this.handleClose}
                 aria-labelledby="responsive-dialog-title"
                 disableBackdropClick={true}
+                onEnter={this.handleLoad}
               >
                 <DialogTitle className="titulo-dialog" id="responsive-dialog-title">
                   { this.props.isEditMode? "Editar Usuario": "Crear Usuario" }
@@ -146,6 +180,7 @@ class CrearUsuario extends React.Component {
                             value={this.state.name}
                             />
                       </div>
+                      {!this.props.isEditMode ?
                       <div className="row" id="txtEmail" style={{ marginTop: '10px'}}>
                         <TextField
                             label="Email"
@@ -159,7 +194,7 @@ class CrearUsuario extends React.Component {
                             value={this.state.email}
                             onBlur={this.onBlurEmail}
                         />
-                      </div>     
+                      </div>:null}
                       {!this.props.isEditMode ?
                       <div className="row" id="txtPass" style={{ marginTop: '10px'}}>
                         <TextField
@@ -221,7 +256,7 @@ const mapStateToProps = (state, ownProps) => {
   return {
     shouldOpenCreateUserModal: state.modals.crearEditarUsuarioModal.shouldOpenCrearEditarUsuarioModal,
     usuarioData: state.modals.crearEditarUsuarioModal.usuarioData,
-    isEditMode: state.modals.crearEditarUsuarioModal.isEditMode
+    isEditMode: state.modals.crearEditarUsuarioModal.isEditMode    
   }
 }
 
@@ -232,8 +267,11 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     },
     createUsuario: (usuario) => {
       dispatch(actionCrearUsuario(usuario))
-    }    
+    },
+    updateUsuario: (usuario) => {
+      dispatch(actionEditarUsuario(usuario))
+    }
   }
 }
 
-export default connect(mapStateToProps,mapDispatchToProps)(CrearUsuario);
+export default connect(mapStateToProps,mapDispatchToProps)(CrearEditarUsuario);

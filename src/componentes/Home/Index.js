@@ -5,7 +5,7 @@ import { actionLogout } from './../../actions/loginActions';
 import ListadoUsuarios from './../Usuarios/ListadoUsuarios';
 import './style.css';
 import logo from './../../logo.svg';
-import  CrearUsuario from '../Usuarios/CrearUsuario';
+import  CrearEditarUsuario from '../Usuarios/CrearEditarUsuario';
 import AlertDialog from './../Genericos/ErrorDialog';
 import { actionCloseAlertDialog } from './../../actions/modalActions';
 
@@ -55,7 +55,7 @@ class Home extends React.Component {
                     <img src={logo} className="App-logo" alt="logo" /></div>)}
                     
                 </div>
-                <CrearUsuario/>                
+                <CrearEditarUsuario />                
             </div>
         );
     }

@@ -95,6 +95,7 @@ class ListadoUsuarios extends React.Component {
              filter: false,
              selectableRows: true,
              responsive: 'stacked',
+             rowsPerPageOptions: [5,10,20],
              textLabels: {
                 body: {
                   noMatch: "No se encontró información",
