@@ -9,8 +9,7 @@ export const actionLoginSuccess = values => ({ type: CONSTANTES.LOGIN.LOGIN_SUCC
 export const actionLogout =()=> ({ type: CONSTANTES.LOGIN.LOGOUT});
 
 export const actionDoLogin = ({email, password}, history) => {
-console.log('LOGIN');
-  console.log(process.env);
+
     const requestBody = {
         email: email,
         password
