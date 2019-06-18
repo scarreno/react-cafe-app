@@ -1,4 +1,4 @@
-import { createStore, applyMiddleware  } from 'redux';
+import { createStore, applyMiddleware, compose  } from 'redux';
 import { persistStore, persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 
@@ -16,9 +16,28 @@ const persistConfig = {
 
 const pReducer = persistReducer(persistConfig, reducers);
 
-export const store = createStore(
-                pReducer, 
-                mainState,
-                applyMiddleware(thunk,logger));
+const middlewares = [];
+let store = {};
 
+middlewares.push(thunk);
+
+if (process.env.NODE_ENV === "development") {
+    middlewares.push(logger);
+
+    const composeEnhancers =
+    typeof window === "object" &&
+    window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ ?
+      window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({
+      }) : compose;
+
+    const enhancer = composeEnhancers(applyMiddleware(...middlewares));
+    store = createStore(pReducer, mainState, enhancer);
+}else{
+    store = createStore(
+        pReducer,
+        mainState,
+        applyMiddleware(...middlewares)
+      );
+}
+export { store };
 export const persistor = persistStore(store);
