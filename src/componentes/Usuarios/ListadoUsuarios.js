@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import MUIDataTable from "mui-datatables";
 import Button from '@material-ui/core/Button';
 import { actionOpenEditarUsuarioModal } from './../../actions/modalActions';
+import { actionEliminarUsuario } from './../../actions/usuariosActions';
 
 class ListadoUsuarios extends React.Component {
 
@@ -18,11 +19,13 @@ class ListadoUsuarios extends React.Component {
         this.props.openEditModal(usuarioData);
     }
 
-    handleEliminar =(event)=>{
-        console.log(event);
+    handleEliminar =(data)=>{
+        const id =  data[0];
+        this.props.deleteUsuario(id);
     }
 
     render() {
+        // eslint-disable-next-line array-callback-return
         this.props.rows.map(field => {
             field.statusDesc =field.status ? 'Activo':'Inactivo'
         });
@@ -84,16 +87,32 @@ class ListadoUsuarios extends React.Component {
                                 );
                             }
                         }
-                    },
+            },
+            {
+                name: "Eliminar",
+                options: {
+                   filter: true,
+                   sort: false,
+                   empty: true,
+                   customBodyRender: (value, tableMeta, updateValue) => {
+                       
+                                   return (
+                                       <Button variant="contained" color="secondary" onClick={()=>{this.handleEliminar(tableMeta.rowData);}}>
+                                           Eliminar
+                                       </Button>
+                                   );
+                               }
+                           }
+               }
            ];
            
            const options = {
-             filterType: 'multiselect',
+             filterType: 'textField',
              print: false,
              download: false,
              viewColumns: false,
              filter: false,
-             selectableRows: true,
+             selectableRows: false,
              responsive: 'stacked',
              rowsPerPageOptions: [5,10,20],
              textLabels: {
@@ -108,13 +127,9 @@ class ListadoUsuarios extends React.Component {
                 rowsPerPage: "Filas por página:",
                 displayRows: "of",
               },
-            onRowsSelect: (currentRowsSelected, allRowsSelected)=>{
-                console.log(allRowsSelected);
-
-            }
            };
         return (
-            <div>
+            <div style={{marginTop: 20, marginLeft: 50, marginRight: 50, marginBottom: 10}}>
                 <MUIDataTable
                 title={"Listado de Usuarios"}
                 data={this.props.rows}
@@ -138,6 +153,9 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     return {
         openEditModal: (userData) => {
             dispatch(actionOpenEditarUsuarioModal(userData));
+        },
+        deleteUsuario: (usuarioId) =>{
+            dispatch(actionEliminarUsuario(usuarioId));
         }
     }
 }

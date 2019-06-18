@@ -2,7 +2,8 @@ import CONSTANTES from '../Constantes';
 import axios from 'axios';
 import { apiGetUsuarios, 
          apiCreateUsuarios,
-         apiEditUsuarios
+         apiEditUsuarios,
+         apiDeleteUsuarios
         } from '../config/apiUrl';
 import { store } from '../store/Index';
 import qs from 'qs';
@@ -92,6 +93,37 @@ export const actionEditarUsuario = (usuario) => {
         const response = await axios.put(url, qs.stringify(requestBody), config);
         dispatch(actionGetUsuarios());
         dispatch(actionEditarUsuarioSuccess(response.data));
+        dispatch(actionCloseCrearUsuarioModal());
+      }
+      catch(error){
+        dispatch(actionCloseCrearUsuarioModal());
+        if(error.response.status===401){
+          dispatch(actionOpenAlertDialog(CONSTANTES.DEFAULT_MESSAGES.NOT_AUTHORIZED));
+        }else{
+          dispatch(actionOpenAlertDialog(error.response.data.err.message));
+        }
+      }
+    }
+}
+
+
+export const actionEliminarUsuarioSuccess = values => ({ type: CONSTANTES.USUARIOS.UPDATE_USUARIO_SUCCESS, datos: values});
+export const actionEliminarUsuarioError = error => ({ type: CONSTANTES.USUARIOS.UPDATE_USUARIO_ERROR, error});
+export const actionEliminarUsuario = (usuarioId) => {
+  const state = store.getState();
+  
+  const config = {
+      headers: {
+        'Authorization': state.authentication.token
+      }
+    };
+
+    return async(dispatch)=>{
+      try{
+        const url=apiDeleteUsuarios(usuarioId);
+        const response = await axios.delete(url, config);
+        dispatch(actionGetUsuarios());
+        dispatch(actionEliminarUsuarioSuccess(response.data));
         dispatch(actionCloseCrearUsuarioModal());
       }
       catch(error){
