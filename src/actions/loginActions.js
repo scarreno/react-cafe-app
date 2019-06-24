@@ -30,8 +30,12 @@ export const actionDoLogin = ({email, password}, history) => {
             history.push('/');
         }
         catch (error) {
-          console.log(error.response);
-            dispatch(actionOpenAlertDialog(error.response.data.error.message));
+          if(error.response === undefined){
+              dispatch(actionOpenAlertDialog('Error no controlado, vuelva a intentar en unos minutos'));
+          }
+            else{
+              dispatch(actionOpenAlertDialog(error.response.data.error.message));
+            }              
         }
     };
   };

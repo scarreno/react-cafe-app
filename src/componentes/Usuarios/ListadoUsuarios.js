@@ -129,6 +129,8 @@ class ListadoUsuarios extends React.Component {
            };
         return (
             <div style={{marginTop: 20, marginLeft: 50, marginRight: 50, marginBottom: 10}}>
+                nombre: {this.props.nombre}
+                
                 <MUIDataTable
                 title={"Listado de Usuarios"}
                 data={this.props.rows}
