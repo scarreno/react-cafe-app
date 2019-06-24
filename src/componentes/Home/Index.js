@@ -49,7 +49,7 @@ class Home extends React.Component {
                     openUserCreationModal={this.createUser}
                     />    
                 <div>
-                    {this.props.authentication.isAuthenticated ? (<ListadoUsuarios rows={this.props.usuarios}/>) 
+                    {this.props.authentication.isAuthenticated ? (<ListadoUsuarios rows={this.props.usuarios} nombre={"casdasd"}/>) 
                     : 
                     (<div><label className="pageTitleLabel">React Cafe App</label> <br/>
                     <img src={logo} className="App-logo" alt="logo" /></div>)}

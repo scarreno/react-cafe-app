@@ -44,6 +44,8 @@ class Login extends React.Component {
     render() {
         return (            
             <div className="container">
+
+                
                 <AlertDialog shouldOpenDialog={this.props.shouldShowAlert} 
                         title="Error de Conexión" 
                         message={this.props.errorMessage} 
